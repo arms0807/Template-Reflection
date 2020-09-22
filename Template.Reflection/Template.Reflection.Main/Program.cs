@@ -1,6 +1,7 @@
 ﻿using System;
 using Template.Reflection.Model;
 using Template.Reflection.SqlHelper;
+using Template.Reflection.Attribute;
 
 namespace Template.Reflection.Main
 {
@@ -12,6 +13,8 @@ namespace Template.Reflection.Main
             {
                 var temp = new Crud_Template<User>().Read(1);
                 var temp_list = new Crud_Template<Company>().All();
+                //new Attributes().ShowAttributes(temp);
+                temp.ShowAttributes();
             }
             catch(Exception ex)
             {

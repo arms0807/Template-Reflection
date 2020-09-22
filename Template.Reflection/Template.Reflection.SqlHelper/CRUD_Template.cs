@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Template.Reflection.Model;
 
 namespace Template.Reflection.SqlHelper
 {
-    public class Crud_Template<T> : ICrud_Template<T> where T : class
+    public class Crud_Template<T> : ICrud_Template<T> where T : BaseModel
     {
         private readonly string cstring = @"Data Source=DESKTOP-PSSM12B\ANTRA;Initial Catalog=Customer;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public ICollection<T> All()

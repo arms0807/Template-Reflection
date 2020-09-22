@@ -1,14 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Template.Reflection.Attribute\Template.Reflection.Attribute.csproj" />
     <ProjectReference Include="..\Template.Reflection.Model\Template.Reflection.Model.csproj" />
-    <ProjectReference Include="..\Template.Reflection.SqlHelper\Template.Reflection.SqlHelper.csproj" />
   </ItemGroup>
 
 </Project>
