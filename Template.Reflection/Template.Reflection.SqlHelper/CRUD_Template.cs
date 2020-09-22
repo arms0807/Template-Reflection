@@ -34,6 +34,46 @@ namespace Template.Reflection.SqlHelper
             return list;
         }
 
+        public bool Delete<T>(int id)
+        {
+            var type = typeof(T);
+            var sql = $"DELETE FROM [{type.Name}] WHERE [Id] = {id}";
+            using(var conn = new SqlConnection(cstring))
+            {
+                var s = new SqlCommand(sql, conn);
+                conn.Open();
+                var num = s.ExecuteNonQuery();
+                if(num == 0)
+                {
+                    return false;
+                }
+                Console.WriteLine($"Affect {num} rows");
+                return true;
+            }
+        }
+
+        public T Insert(T obj)
+        {
+            var type = typeof(T);
+            var props = type.GetProperties().Where(name => name.Name != "Id");
+            var col = string.Join(",", props.Select(x => $"[{x.Name}]"));
+            var val = string.Join(",", props.Select(c => $"@{c.Name}"));
+            var sql = $"INSERT INTO [{type.Name}]({col}) VALUES {val}";
+            var param = props.Select(x => new SqlParameter($"@{x.Name}", x.GetValue(obj) ?? DBNull.Value)).ToArray();
+            using (var conn = new SqlConnection(cstring))
+            {
+                var s = new SqlCommand(sql, conn);
+                s.Parameters.AddRange(param);
+                conn.Open();
+                var num = s.ExecuteNonQuery();
+                if(num == 0)
+                {
+                    throw new Exception("Something went wrong when you insert the data");
+                }
+            }
+            return obj;
+        }
+
         public T Read(int id)
         {
             var type = typeof(T);
@@ -55,6 +95,11 @@ namespace Template.Reflection.SqlHelper
                 }
             }
             return default(T);
+        }
+
+        public T Update(T obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

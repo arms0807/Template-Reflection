@@ -11,10 +11,12 @@ namespace Template.Reflection.Main
         {
             try
             {
-                var temp = new Crud_Template<User>().Read(1);
+                var temp = new Crud_Template<User>().Read(2);
+                var temp2 = new Crud_Template<Company>().Read(3);
                 var temp_list = new Crud_Template<Company>().All();
-                //new Attributes().ShowAttributes(temp);
                 temp.ShowAttributes();
+                //Console.WriteLine(new Crud_Template<Company>().Delete<Company>(15));
+                new Crud_Template<User>().Insert(temp);
             }
             catch(Exception ex)
             {
