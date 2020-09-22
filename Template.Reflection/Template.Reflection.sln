@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Reflection.Main", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Reflection.Model", "Template.Reflection.Model\Template.Reflection.Model.csproj", "{F572F9B4-B3F4-4661-83E4-57B7B3854FFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Reflection.SqlHelper", "Template.Reflection.SqlHelper\Template.Reflection.SqlHelper.csproj", "{F3A03A87-D13A-43DD-992E-C02B60F55792}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F572F9B4-B3F4-4661-83E4-57B7B3854FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F572F9B4-B3F4-4661-83E4-57B7B3854FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F572F9B4-B3F4-4661-83E4-57B7B3854FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A03A87-D13A-43DD-992E-C02B60F55792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A03A87-D13A-43DD-992E-C02B60F55792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A03A87-D13A-43DD-992E-C02B60F55792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A03A87-D13A-43DD-992E-C02B60F55792}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
