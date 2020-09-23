@@ -8,8 +8,8 @@ namespace Template.Reflection.SqlHelper
     {
         public T Read(int id);
         public ICollection<T> All();
-        public T Insert(T obj);
+        public bool Insert(T obj);
         public bool Delete<T>(int id);
-        public T Update(T obj);
+        public bool Update(T obj);
     }
 }

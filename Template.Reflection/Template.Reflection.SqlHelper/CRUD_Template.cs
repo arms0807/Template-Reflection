@@ -52,13 +52,13 @@ namespace Template.Reflection.SqlHelper
             }
         }
 
-        public T Insert(T obj)
+        public bool Insert(T obj)
         {
             var type = typeof(T);
             var props = type.GetProperties().Where(name => name.Name != "Id");
             var col = string.Join(",", props.Select(x => $"[{x.Name}]"));
             var val = string.Join(",", props.Select(c => $"@{c.Name}"));
-            var sql = $"INSERT INTO [{type.Name}]({col}) VALUES {val}";
+            var sql = $"INSERT INTO [{type.Name}]({col}) VALUES ({val})";
             var param = props.Select(x => new SqlParameter($"@{x.Name}", x.GetValue(obj) ?? DBNull.Value)).ToArray();
             using (var conn = new SqlConnection(cstring))
             {
@@ -71,7 +71,7 @@ namespace Template.Reflection.SqlHelper
                     throw new Exception("Something went wrong when you insert the data");
                 }
             }
-            return obj;
+            return true;
         }
 
         public T Read(int id)
@@ -97,9 +97,25 @@ namespace Template.Reflection.SqlHelper
             return default(T);
         }
 
-        public T Update(T obj)
+        public bool Update(T obj)
         {
-            throw new NotImplementedException();
+            var type = typeof(T);
+            var prop = type.GetProperties().Where(p => p.Name != "Id");
+            var col = string.Join(",", prop.Select(p => $"{p.Name} = @{p.Name}"));
+            var sql = $"UPDATE [{type.Name}] SET {col} WHERE Id = {obj.Id}";
+            var param = prop.Select(p => new SqlParameter($"@{p.Name}", p.GetValue(obj) ?? DBNull.Value)).ToArray();
+            using (var conn = new SqlConnection(cstring))
+            {
+                var s = new SqlCommand(sql, conn);
+                s.Parameters.AddRange(param);
+                conn.Open();
+                var num = s.ExecuteNonQuery();
+                if(num == 0)
+                {
+                    throw new Exception("No column been updated");
+                }
+                return true;
+            }
         }
     }
 }
